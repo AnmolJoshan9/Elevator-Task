@@ -77,47 +77,51 @@ function moveElevator(elevator, request) {
   const elevatorElement = document.querySelector(`#${elevator.id} .elevator`);
   elevatorElement.style.backgroundColor = 'red';
 
-  const moveInterval = setInterval(() => {
-    if (elevator.currentFloor < request.floor) {
-      elevator.currentFloor++;
-    } else if (elevator.currentFloor > request.floor) {
-      elevator.currentFloor--;
-    } else {
-      clearInterval(moveInterval);
-      elevatorArrived(elevator, request);
-      processQueue();
-      return;
-    }
+  const totalDistance = Math.abs(elevator.currentFloor - request.floor);
+  const duration = totalDistance * 1000; // 1 second per floor
 
-    updateElevatorPosition(elevator);
-  }, 1000);
+  elevatorElement.style.transition = `bottom ${duration}ms linear`;
+  updateElevatorPosition(elevator, request.floor);
+
+  setTimeout(() => {
+    elevatorArrived(elevator, request);
+  }, duration);
 }
 
-function updateElevatorPosition(elevator) {
+function updateElevatorPosition(elevator, targetFloor) {
   const elevatorElement = document.querySelector(`#${elevator.id} .elevator`);
-  elevatorElement.style.bottom = `${elevator.currentFloor * 50}px`;
+  elevatorElement.style.bottom = `${targetFloor * 50}px`;
 }
 
 function elevatorArrived(elevator, request) {
   elevator.isMoving = false;
+  elevator.currentFloor = request.floor;
 
   const arrivalSound = document.getElementById('arrival-sound');
   arrivalSound.play();
 
   const elevatorElement = document.querySelector(`#${elevator.id} .elevator`);
-  elevatorElement.style.backgroundColor = 'blue'; // Changed to blue when arrived
+  elevatorElement.style.backgroundColor = 'blue';
+  elevatorElement.style.transition = ''; // Reset transition
 
   stopButtonTimer(request);
   request.button.textContent = 'Arrived';
-  request.button.style.backgroundColor = 'blue'; // Changed to blue when arrived
+  request.button.style.backgroundColor = 'blue';
 
+  // Wait 2 seconds before moving to the next call
   setTimeout(() => {
+    // Change the elevator color back to black
     elevatorElement.style.backgroundColor = '';
+
+    // Change the button to "Call" with the initial design
     request.button.textContent = 'Call';
     request.button.style.backgroundColor = '';
     request.button.disabled = false;
+
+    // Process the next request in the queue
+    processQueue();
   }, 2000);
 }
 
 // Initialize the elevator positions
-elevators.forEach(updateElevatorPosition);
+elevators.forEach(elevator => updateElevatorPosition(elevator, 0));
