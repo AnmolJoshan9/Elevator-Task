@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevator Exercise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Elevator</h1>
+        <div class="elevator-system">
+            <div class="floors">
+                <div class="floor" data-floor="0"><span>Ground</span></div>
+                <div class="floor" data-floor="1"><span>1st</span></div>
+                <div class="floor" data-floor="2"><span>2nd</span></div>
+                <div class="floor" data-floor="3"><span>3rd</span></div>
+                <div class="floor" data-floor="4"><span>4th</span></div>
+                <div class="floor" data-floor="5"><span>5th</span></div>
+                <div class="floor" data-floor="6"><span>6th</span></div>
+                <div class="floor" data-floor="7"><span>7th</span></div>
+                <div class="floor" data-floor="8"><span>8th</span></div>
+                <div class="floor" data-floor="9"><span>9th</span></div>
+            </div>
+            <div class="elevators-container">
+                <div class="elevator-column" id="elevator1">
+                    <div class="elevator"><img src="dtg.svg" alt="Elevator" height="35px" width="50px"></div>
+                </div>
+                <div class="elevator-column" id="elevator2">
+                    <div class="elevator"><img src="dtg.svg" alt="Elevator" height="35px" width="50px"></div>
+                </div>
+                <div class="elevator-column" id="elevator3">
+                    <div class="elevator"><img src="dtg.svg" alt="Elevator" height="35px" width="50px"></div>
+                </div>
+                <div class="elevator-column" id="elevator4">
+                    <div class="elevator"><img src="dtg.svg" alt="Elevator" height="35px" width="50px"></div>
+                </div>
+                <div class="elevator-column" id="elevator5">
+                    <div class="elevator"><img src="dtg.svg" alt="Elevator" height="35px" width="50px"></div>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <button class="call-button" data-floor="0">Call</button>
+                <button class="call-button" data-floor="1">Call</button>
+                <button class="call-button" data-floor="2">Call</button>
+                <button class="call-button" data-floor="3">Call</button>
+                <button class="call-button" data-floor="4">Call</button>
+                <button class="call-button" data-floor="5">Call</button>
+                <button class="call-button" data-floor="6">Call</button>
+                <button class="call-button" data-floor="7">Call</button>
+                <button class="call-button" data-floor="8">Call</button>
+                <button class="call-button" data-floor="9">Call</button>
+            </div>
+            <div id="arrival-time" style="font-size: 1.2em; margin-top: 20px;"></div>
+        </div>
+    </div>
+    <audio id="arrival-sound" src="elevator-ding-at-arenco-tower-dubai-38520.mp3" preload="auto"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
